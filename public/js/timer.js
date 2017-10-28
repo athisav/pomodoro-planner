@@ -25,10 +25,8 @@ function timer(elementName, minutes, seconds) {
     time = new Date( msLeft )
     hours = time.getUTCHours()
     mins = time.getUTCMinutes()
-    console.log(hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds())
     element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() )
-    sleep( time.getUTCMilliseconds() + 500 )
-    updateTimer()
+    setTimeout( updateTimer, time.getUTCMilliseconds() + 500 )
     }
   }
 
