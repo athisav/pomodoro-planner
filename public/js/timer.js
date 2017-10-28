@@ -1,41 +1,3 @@
-var running=true
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-
-function timer(elementName, minutes, seconds) {
-
-  var element, endTime, hours, mins, msLeft, time
-
-  function twoDigits(n) {
-    return (n <= 9 ? "0" + n : n)
-  }
-
-  function updateTimer() {
-    msLeft = endTime - (+new Date)
-    if (msLeft < 1000) {
-      element.innerHTML = "Count down is done!"
-    } else {
-    time = new Date( msLeft )
-    hours = time.getUTCHours()
-    mins = time.getUTCMinutes()
-    element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() )
-    setTimeout( updateTimer, time.getUTCMilliseconds() + 500 )
-    }
-  }
-
-  element = document.getElementById(elementName)
-  endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500
-  console.log("hello")
-  updateTimer()
-}
-
 paired_data = []
 
 function refresh_data () {
@@ -66,21 +28,61 @@ function refresh_data () {
 
 refresh_data()
 
-function loop () {
+function main_loop () {
   refresh_data()
   assignment_display = document.getElementById("timer_assignment")
   button = document.getElementById("timer-button-2")
   button.removeEventListener("click", loop)
-  this_assignment = true
-  for (var i=0; i<paired_data.length; i++) {
-    if (this_assignment==true) {
-      assignment_display.innerHTML = "'" + paired_data[i].assignment + "'"
-      button.innerHTML = "Don't Click Here, Go Work!"
-      timer("timer", 0, 10)
-    }
-    button.innerHTML = "Done With This Assignment?"
-    timer("timer", 0, 10)
+  timer = document.getElementById("timer")
+  var data_increment = 0
+
+  var countdown = 0;
+  var state = 0;
+
+
+  function second_minute(i){
+      var x = i;
+      var y = 0;
+  while(x>=60){
+      x-= 60
+      y++;
   }
+  return([y,x])
+  }
+
+  function init(){
+      var time = 10;
+      console.log(data_increment)
+      if(state == 0){
+          //assigment
+          assignment_display.innerHTML = "'" + paired_data[data_increment].assignment + "'"
+          //
+          state = 1
+          time = 10;
+      }else{
+          state = 0
+      }
+      data_increment++
+      countdown = time;
+      refresh_data()
+  }
+
+  function update(){
+      countdown--;
+      if(countdown<1){
+          timer.innerHTML = "Count down is done!"
+          return 1;
+      }else{
+          timer.innerHTML = second_minute(countdown)[0] + " : " + second_minute(countdown)[1];
+          return 0;
+      }
+  }
+  function loop(){
+      if(update()){
+          init()
+      }
+  }
+  setInterval(loop,1000)
 }
 
-document.getElementById("timer-button-2").addEventListener("click", loop)
+document.getElementById("timer-button-2").addEventListener("click", main_loop)
