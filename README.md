@@ -1,4 +1,4 @@
-# pomodoro-timer
+# Pomodoro-Planner
 
 This is a pomodoro-strategy based timer. This means that it allows a small break every defined interval to maximize concentration. Also, it includes a task scheduler that sorts tasks based on deadline. It should, when complete maximize effeciency when working.
 
