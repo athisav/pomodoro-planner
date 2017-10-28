@@ -31,12 +31,13 @@ refresh_data()
 function main_loop () {
   refresh_data()
   assignment_display = document.getElementById("timer_assignment")
+  assignment_display.innerHTML = "'" + "Get Ready!" + "'"
   button = document.getElementById("timer-button-2")
   button.removeEventListener("click", loop)
+  button.remove()
   timer = document.getElementById("timer")
-  var data_increment = 0
 
-  var countdown = 0;
+  var countdown = 10;
   var state = 0;
 
 
@@ -52,17 +53,18 @@ function main_loop () {
 
   function init(){
       var time = 10;
-      console.log(data_increment)
       if(state == 0){
+          console.log("aaa")
           //assigment
-          assignment_display.innerHTML = "'" + paired_data[data_increment].assignment + "'"
+          assignment_display.innerHTML = "'" + paired_data[0].assignment + "'"
           //
           state = 1
           time = 10;
       }else{
+        assignment_display.innerHTML = "'" + "Break Time!" + "'"
+          paired_data.shift()
           state = 0
       }
-      data_increment++
       countdown = time;
       refresh_data()
   }
