@@ -20,11 +20,11 @@
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h1 class="header center black-text">Welcome to Pomodoro Timer</h1>
+      <h1 class="header center black-text">Welcome to Pomodoro Planner</h1>
       <br>
       <div class="row center">
         <a id="logo-container" href="#" class="brand-logo"><img src="https://lh4.ggpht.com/eaKKhSXDW7JHsMhJnW4UOxl6V_AifpnPTgHjtW6LmJGC5edHW4jPfJBuujzknTCoQA=w300" alt="tomato2" width="250" height="250"/></a>
-        <h5 class="header col s12 light">The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks.</h5>
+        <h5 class="header col s12 light">This application is made to help you focus on your work: using the pomodoro technique, a method proven to increase focus, it cycles through your assignments and implements this technique to streamline your work time and make your life just that much easier.</h5>
         <br><br><br><br><br><br>
         <h3 class="header col s12 light">To get started scroll below!</h3>
       </div>
@@ -37,25 +37,29 @@
   <div class="container">
     <form class="col s12">
     <br><br><br><br>
-    <h1 class="header center black-text">Enter your assignment!</h1>
+    <h1 class="header center black-text">Enter your assignments:</h1>
     <br><br><br><br>
 
     <!--Assignment Input Block Begin-->
     <div id="assignmentBlockCollection">
       <div id="inputBlock">
-        <h5 class="header center black-text">Assignment Name</h5>
+        <h5 class="header center black-text">Assignment</h5>
 
         <div class="row center">
           <div class="input-field col s12">
             <input id="assignment" type="text" class="validate assignment" required>
-            <label for="assignment">Assignment</label>
+            <label for="assignment">Assignment Name</label>
           </div>
         </div>
 
         <br><br><br><br><br>
 
-          <h5 class="header center black-text">Due Date</h5>
-          <input id="date" type="date" class="datepicker date" required>
+        <div class="row center">
+          <div class="input-field col s12">
+            <input id="days-till-due" type="text" class="validate days-till-due" required>
+            <label for="days-till-due">Days Till Due</label>
+          </div>
+        </div>
         <br><br><br>
       </div>
     </div>
@@ -72,46 +76,48 @@
   </form>
 </div>
 
-  <!-- Timer  -->
-  <div class="divider"></div>
-    <div class="container">
-      <div class="section">
-      <br><br><br>
+<!-- Timer  -->
+<div class="divider"></div>
+  <div class="container">
+    <div class="section">
+    <br><br><br>
 
-      <h1 class="header center black-text">Timer</h1>
-      <br><br><br><br>
-      <h1 class="header center black-text">00:00:00 </h1>
+    <h1 class="header center black-text">Timer</h1>
+    <br>
+    <h1 class="header center black-text" id="timer_assignment"></h1>
+    <br>
+    <h1 class="header center black-text" id="timer"></h1>
 
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <br><br><br><br>
-            <div class="row center">
-              <a href="http://google.com" id="start-button" class="btn-large teal accent-3"><i class="material-icons right">done</i>Start</a>
-            </div>
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="icon-block">
+
+          <div class="row center">
+            <!--<a href="http://google.com" id="start-button" class="btn-large teal accent-3"><i class="material-icons right">done</i>Start</a>-->
           </div>
         </div>
+      </div>
 
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <br><br><br><br>
-            <div class="row center">
-              <a href="http://google.com" id="stop-button" class="btn-large deep-orange accent-3"><i class="material-icons right">pause</i>Stop</a>
-            </div>
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <br><br>
+          <div class="row center">
+            <a href="javascript:void(0)" id="timer-button-2" class="btn-large teal accent-3"><i class="material-icons right">done</i>Start</a>
           </div>
         </div>
+      </div>
 
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <br><br><br><br>
-            <div class="row center">
-              <a href="http://google.com" id="reset-button" class="btn-large light-blue accent-3"><i class="material-icons right">stop</i>Reset</a>
-            </div>
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <br><br>
+          <div class="row center">
+              <!--<a href="http://google.com" id="start-button" class="btn-large teal accent-3"><i class="material-icons right">done</i>Start</a>-->
           </div>
         </div>
       </div>
     </div>
-    <br><br><br><br><br><br>
+  </div>
+  <br><br><br><br><br><br>
 </div>
 
   <!-- Footer  -->
@@ -119,34 +125,34 @@
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Author</h5>
-          <p class="grey-text text-lighten-4">Made specifically for GunnHacks.</p>
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">This application was made under 24 hours at GunnHacks 4.0</p>
 
 
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Links</h5>
+          <h5 class="white-text">Creators</h5>
           <ul>
-            <li><a class="white-text" href="#!">Main</a></li>
-            <li><a class="white-text" href="#!">Task</a></li>
-            <li><a class="white-text" href="#!">Timer</a></li>
-            <li><a class="white-text" href="#!">Calendar</a></li>
+            <li>Alexander Waitz</li>
+            <li>Athisa Goh</li>
+            <li>Chris Kalley</li>
+            <li>Andrew Wang</li>
           </ul>
         </div>
         <div class="col l3 s12">
           <h5 class="white-text">Connect</h5>
           <ul>
-            <li><a class="white-text" href="#!">MLH</a></li>
-            <li><a class="white-text" href="#!">AWS</a></li>
-            <li><a class="white-text" href="#!">Github</a></li>
-            <li><a class="white-text" href="#!">Slack</a></li>
+            <li><a class="white-text" href="https://mlh.io/">MLH</a></li>
+            <li><a class="white-text" href="https://aws.amazon.com/">AWS</a></li>
+            <li><a class="white-text" href="https://github.com/">Github</a></li>
+            <li><a class="white-text" href="https://slack.com/">Slack</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        Pomodoro Planner
       </div>
     </div>
   </footer>
@@ -157,6 +163,7 @@
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/inputManager.js"></script>
+  <script src="js/timer.js"></script>
 
 
   </body>
