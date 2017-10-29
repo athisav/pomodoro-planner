@@ -31,7 +31,7 @@ function refresh_data () {
 
 refresh_data();
 
-function main () {
+function main_loop () {
   console.log("init");
   refresh_data();
   assignment_display = document.getElementById("timer_assignment");
@@ -90,4 +90,4 @@ function main () {
   }
   setInterval(loop,1000);
 }
-document.getElementById("timer-button-2").addEventListener("click", loop);
+document.getElementById("timer-button-2").addEventListener("click", main_loop);
