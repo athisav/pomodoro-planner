@@ -28,7 +28,9 @@ function refresh_data () {
   }
 }
 };
-
+function clearassign(){
+  paired_data = [];
+}
 refresh_data();
 //The main program
 function main_loop () {
