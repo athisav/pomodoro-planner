@@ -16,7 +16,7 @@ function refresh_data () {
   while (sorted_status==false) {
     sorted_status = true;
     for (var i=0; i<paired_data.length; i++) {
-      if (i+1!==paired_data.length) {;
+      if (i+1!==paired_data.length) {
         if (paired_data[i].days_till_due>paired_data[i+1].days_till_due) {
           var d1 = paired_data[i];
           var d2 = paired_data[i+1];
