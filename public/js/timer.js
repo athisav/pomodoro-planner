@@ -1,5 +1,5 @@
 paired_data = [];
-
+//Loads assigment data
 function refresh_data () {
   data = localStorage.getItem("data");
   data = JSON.parse(data);
@@ -30,7 +30,7 @@ function refresh_data () {
 };
 
 refresh_data();
-
+//The main program
 function main_loop () {
   console.log("init");
   refresh_data();
@@ -40,9 +40,9 @@ function main_loop () {
   button.removeEventListener("click", loop);
   button.remove();
   timer = document.getElementById("timer");
-  var countdown = 0;
+  var countdown = 10;
   var state = 0;
-
+//conversion between seconds and minutes
   function second_minute(i){
       var x = i;
       var y = 0;
@@ -52,7 +52,7 @@ function main_loop () {
     }
     return([y,x]);
   }
-
+//initialization of next timer
   function init(){
       var time = 300;
       if(state == 0){
@@ -72,16 +72,32 @@ function main_loop () {
       countdown = time;
       refresh_data();
   }
-
+  //normalizes time, makes weird things like 0:4 into 00:04
+function timezeros(time){
+  var output = "";
+  if(time<10){
+    output = "0"+ time;
+  }else{
+    output = time;
+  }
+  return(output);
+};
+//displays the time(an array with minutes then seconds)
+function displaytime(t){
+  var time = second_minute(t);
+  var minute = timezeros(time[0]);
+  var second = timezeros(time[1]);
+  timer.innerHTML = minute + " : " + second;
+}
+//updates timer
   function update(){
       countdown--;
+      displaytime(countdown);
       if(countdown<1){
-          timer.innerHTML = "Count down is done!";
           return 1;
-      }else{
-          timer.innerHTML = second_minute(countdown)[0] + " : " + second_minute(countdown)[1];
-          return 0;
       }
+
+      return 0;
   }
   function loop(){
       if(update()){
