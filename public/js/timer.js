@@ -40,7 +40,6 @@ function main_loop () {
   var countdown = 10;
   var state = 0;
 
-
   function second_minute(i){
       var x = i;
       var y = 0;
@@ -59,7 +58,7 @@ function main_loop () {
           assignment_display.innerHTML = "'" + paired_data[0].assignment + "'"
           //
           state = 1
-          time = 10;
+          time = 1500;
       }else{
         assignment_display.innerHTML = "'" + "Break Time!" + "'"
           paired_data.shift()
