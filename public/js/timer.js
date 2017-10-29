@@ -6,7 +6,7 @@ function refresh_data () {
 
   for (var i=0; i<data.assignments.length; i++) {
     paired_data.push({
-      assignment : data.assignments[i], 
+      assignment : data.assignments[i],
       days_till_due : data.days_till_due[i]
     });
   }
@@ -30,7 +30,8 @@ function refresh_data () {
 
 refresh_data();
 
-function main_loop () {
+function main () {
+  console.log("init");
   refresh_data();
   assignment_display = document.getElementById("timer_assignment");
   assignment_display.innerHTML = "'" + "Get Ready!" + "'";
@@ -44,11 +45,11 @@ function main_loop () {
   function second_minute(i){
       var x = i;
       var y = 0;
-  while(x>=60){
-      x-= 60;
-      y++;
-  }
-  return([y,x]);
+    while(x>=60){
+        x-= 60;
+        y++;
+    }
+    return([y,x]);
   }
 
   function init(){
@@ -58,7 +59,7 @@ function main_loop () {
           //assigment
           assignment_display.innerHTML = "'" + paired_data[0].assignment + "'";
           //
-          
+
           state = 1
           time = 1500;
 
@@ -88,5 +89,4 @@ function main_loop () {
   }
   setInterval(loop,1000);
 }
-
-document.getElementById("timer-button-2").addEventListener("click", main_loop);
+document.getElementById("timer-button-2").addEventListener("click", loop);
