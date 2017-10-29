@@ -23,8 +23,7 @@ function refresh_data () {
       }
     }
   }
-}
-}
+};
 
 refresh_data();
 
@@ -36,9 +35,8 @@ function main_loop () {
   button.removeEventListener("click", loop);
   button.remove();
   timer = document.getElementById("timer");
-  var countdown = 300;
+  var countdown = 0;
   var state = 0;
-
 
   function second_minute(i){
       var x = i;
@@ -51,14 +49,16 @@ function main_loop () {
   }
 
   function init(){
-      var time = 10;
+      var time = 300;
       if(state == 0){
           console.log("aaa");
           //assigment
           assignment_display.innerHTML = "'" + paired_data[0].assignment + "'";
           //
-          state = 1;
+          
+          state = 1
           time = 1500;
+
       }else{
         assignment_display.innerHTML = "'" + "Break Time!" + "'";
           paired_data.shift();
