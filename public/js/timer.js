@@ -5,7 +5,10 @@ function refresh_data () {
   data = JSON.parse(data);
 
   for (var i=0; i<data.assignments.length; i++) {
-    paired_data.push({assignment : data.assignments[i], days_till_due : data.days_till_due[i]});
+    paired_data.push({
+      assignment : data.assignments[i], 
+      days_till_due : data.days_till_due[i]
+    });
   }
 
   sorted_status = false;
