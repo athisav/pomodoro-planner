@@ -26,6 +26,7 @@ function refresh_data () {
       }
     }
   }
+}
 };
 
 refresh_data();
