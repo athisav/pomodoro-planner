@@ -35,6 +35,9 @@ function clearassign(){
   localStorage.clear();
   return 0;
 }
+function listassign(){
+  console.log(paired_data);
+}
 refresh_data();
 //The main program
 function main_loop () {
