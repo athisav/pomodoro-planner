@@ -1,40 +1,44 @@
 paired_data = [];
 //Loads assigment data
 function refresh_data () {
-  data = localStorage.getItem("data");
-  data = JSON.parse(data);
+    if(localStorage.getItem("data")!= null){
+    data = localStorage.getItem("data");
+    data = JSON.parse(data);
 
-  for (var i=0; i<data.assignments.length; i++) {
-    paired_data.push({
-      assignment : data.assignments[i],
-      days_till_due : data.days_till_due[i]
-    });
-  }
+    for (var i=0; i<data.assignments.length; i++) {
+      paired_data.push({
+        assignment : data.assignments[i],
+        days_till_due : data.days_till_due[i]
+      });
+    }
 
-  sorted_status = false;
+    sorted_status = false;
 
-  while (sorted_status==false) {
-    sorted_status = true;
-    for (var i=0; i<paired_data.length; i++) {
-      if (i+1!==paired_data.length) {
-        if (paired_data[i].days_till_due>paired_data[i+1].days_till_due) {
-          var d1 = paired_data[i];
-          var d2 = paired_data[i+1];
-          paired_data[i] = d2;
-          paired_data[i+1] = d1;
-          sorted_status = false;
+    while (sorted_status==false) {
+      sorted_status = true;
+      for (var i=0; i<paired_data.length; i++) {
+        if (i+1!==paired_data.length) {
+          if (paired_data[i].days_till_due>paired_data[i+1].days_till_due) {
+            var d1 = paired_data[i];
+            var d2 = paired_data[i+1];
+            paired_data[i] = d2;
+            paired_data[i+1] = d1;
+            sorted_status = false;
+        }
       }
     }
+    }
   }
-}
 };
 function clearassign(){
   paired_data = [];
+  localStorage.clear();
+  return 0;
 }
 refresh_data();
 //The main program
 function main_loop () {
-  console.log("init");
+  //console.log("init");
   refresh_data();
   assignment_display = document.getElementById("timer_assignment");
   assignment_display.innerHTML = "'" + "Get Ready!" + "'";
@@ -42,8 +46,9 @@ function main_loop () {
   button.removeEventListener("click", loop);
   button.remove();
   timer = document.getElementById("timer");
-  var countdown = 10;
+  var countdown = 5;
   var state = 0;
+  var running = true;
 //conversion between seconds and minutes
   function second_minute(i){
       var x = i;
@@ -58,9 +63,14 @@ function main_loop () {
   function init(){
       var time = 300;
       if(state == 0){
-          console.log("aaa");
+          //console.log("aaa");
           //assigment
+          if(paired_data[0] == null){
+            running = false;
+            assignment_display.innerHTML = "All Done!"
+          }else{
           assignment_display.innerHTML = "'" + paired_data[0].assignment + "'";
+        }
           //
 
           state = 1
@@ -102,9 +112,13 @@ function displaytime(t){
       return 0;
   }
   function loop(){
+    if(running){
       if(update()){
           init();
       }
+    }else{
+      //console.log("stop");
+    }
   }
   setInterval(loop,1000);
 }
