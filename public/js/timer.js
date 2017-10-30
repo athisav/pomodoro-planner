@@ -46,7 +46,8 @@ function main_loop () {
   button.removeEventListener("click", loop);
   button.remove();
   timer = document.getElementById("timer");
-  var countdown = 5;
+  //Preperation time
+  var countdown = 0;
   var state = 0;
   var running = true;
 //conversion between seconds and minutes
