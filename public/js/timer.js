@@ -2,33 +2,33 @@ paired_data = [];
 //Loads assigment data
 function refresh_data () {
     if(localStorage.getItem("data")!= null){
-    data = localStorage.getItem("data");
-    data = JSON.parse(data);
+      data = localStorage.getItem("data");
+      data = JSON.parse(data);
 
-    for (var i=0; i<data.assignments.length; i++) {
-      paired_data.push({
-        assignment : data.assignments[i],
-        days_till_due : data.days_till_due[i]
-      });
-    }
+      for (var i=0; i<data.assignments.length; i++) {
+        paired_data.push({
+          assignment : data.assignments[i],
+          days_till_due : data.days_till_due[i]
+        });
+      }
 
-    sorted_status = false;
+      sorted_status = false;
 
-    while (sorted_status==false) {
-      sorted_status = true;
-      for (var i=0; i<paired_data.length; i++) {
-        if (i+1!==paired_data.length) {
-          if (paired_data[i].days_till_due>paired_data[i+1].days_till_due) {
-            var d1 = paired_data[i];
-            var d2 = paired_data[i+1];
-            paired_data[i] = d2;
-            paired_data[i+1] = d1;
-            sorted_status = false;
+      while (sorted_status==false) {
+        sorted_status = true;
+        for (var i=0; i<paired_data.length; i++) {
+          if (i+1!==paired_data.length) {
+            if (paired_data[i].days_till_due>paired_data[i+1].days_till_due) {
+              var d1 = paired_data[i];
+              var d2 = paired_data[i+1];
+              paired_data[i] = d2;
+              paired_data[i+1] = d1;
+              sorted_status = false;
+            }
+          }
         }
       }
     }
-    }
-  }
 };
 function clearassign(){
   paired_data = [];
@@ -54,6 +54,7 @@ function main_loop () {
   var countdown = 1;
   var state = 0;
   var running = true;
+
 //conversion between seconds and minutes
   function second_minute(i){
       var x = i;
@@ -64,6 +65,7 @@ function main_loop () {
     }
     return([y,x]);
   }
+
 //initialization of next timer
   function init(){
       var time = 300;
@@ -89,6 +91,7 @@ function main_loop () {
       countdown = time;
       refresh_data();
   }
+
   //normalizes time, makes weird things like 0:4 into 00:04
 function timezeros(time){
   var output = "";
@@ -99,6 +102,7 @@ function timezeros(time){
   }
   return(output);
 };
+
 //displays the time(an array with minutes then seconds)
 function displaytime(t){
   var time = second_minute(t);
@@ -106,6 +110,7 @@ function displaytime(t){
   var second = timezeros(time[1]);
   timer.innerHTML = minute + " : " + second;
 }
+
 //updates timer
   function update(){
     if(!paused){
@@ -119,6 +124,8 @@ function displaytime(t){
     }
       return 0;
   }
+
+//function that keeps running
   function loop(){
     if(running){
       if(update()){
@@ -141,4 +148,4 @@ function pause(){
 }
 
 document.getElementById("timer-button-2").addEventListener("click", main_loop);
-document.getElementByID("timer-button-2").addEventListener("click", pause);
+document.getElementById("timer-button-3").addEventListener("click", pause);
