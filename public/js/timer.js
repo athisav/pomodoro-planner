@@ -40,6 +40,7 @@ function listassign(){
 }
 refresh_data();
 //The main program
+var paused = false;
 function main_loop () {
   //console.log("init");
   refresh_data();
@@ -107,12 +108,15 @@ function displaytime(t){
 }
 //updates timer
   function update(){
+    if(!paused){
       countdown--;
       displaytime(countdown);
       if(countdown<1){
           return 1;
       }
-
+    }else{
+      timer.innerHTML = "PAUSED"
+    }
       return 0;
   }
   function loop(){
@@ -126,4 +130,15 @@ function displaytime(t){
   }
   setInterval(loop,1000);
 }
+
+//pauses timer
+function pause(){
+  if(paused){
+    paused = false;
+  }else{
+    paused = true;
+  }
+}
+
 document.getElementById("timer-button-2").addEventListener("click", main_loop);
+document.getElementByID("timer-button-2").addEventListener("click", pause);
