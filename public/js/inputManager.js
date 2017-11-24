@@ -64,6 +64,7 @@ function loadInputInfo(){
 }
 
 function saveInputInfo() {
+  cleardata();
   assignments_raw = document.getElementsByClassName("assignment")
   assignments = []
   for (var i=0; i<assignments_raw.length; i++) {
