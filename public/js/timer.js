@@ -4,12 +4,15 @@ function refresh_data () {
     if(localStorage.getItem("data")!= null){
       data = localStorage.getItem("data");
       data = JSON.parse(data);
-
       for (var i=0; i<data.assignments.length; i++) {
+        if(data.assignments[i]+""==""){
+          
+        }else{
         paired_data.push({
           assignment : data.assignments[i],
           days_till_due : data.days_till_due[i]
         });
+      }
       }
 
       sorted_status = false;
@@ -38,7 +41,6 @@ function cleardata(){
 function listassign(){
   console.log(paired_data);
 }
-refresh_data();
 loadInputInfo();
 //The main program
 var paused = false;
