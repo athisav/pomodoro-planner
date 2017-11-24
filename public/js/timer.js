@@ -30,8 +30,8 @@ function refresh_data () {
       }
     }
 };
-function clearassign(){
-  paired_data = [];
+function cleardata(){
+  //paired_data = [];
   localStorage.clear();
   return 0;
 }
@@ -39,6 +39,7 @@ function listassign(){
   console.log(paired_data);
 }
 refresh_data();
+loadInputInfo();
 //The main program
 var paused = false;
 function main_loop () {
@@ -68,6 +69,8 @@ function main_loop () {
 
 //initialization of next timer
   function init(){
+    cleardata();
+    saveInputInfo();
       var time = 300;
       if(state == 0){
           //console.log("aaa");

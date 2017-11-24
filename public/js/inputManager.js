@@ -1,17 +1,20 @@
+var sorted_status = false;
 //getting the place that will be modified
 var block_collection = document.getElementById("assignmentBlockCollection")
 
 //turning this html text into html object
-var input_block = "<div id='inputBlock'><h5 class='header center black-text'>Assignment</h5><div class='row center'><div class='input-field col s12'><input id='assignment' type='text' class='validate assignment' required><label for='assignment'>Assignment Name</label></div></div><br><br><br><br><br><div class='row center'><div class='input-field col s12'><input id='days-till-due' type='text' class='validate days-till-due' required><label for='days-till-due'>Days Till Due</label></div></div><br><br><br></div>"
 
-function addInputBlock() {
-  var e = document.createElement("div")
+function addInputBlock(name,days) {
+  if(name==undefined||days==undefined){
+    name = ""
+    days = ""
+  }
+  var e = document.createElement("div");
+  var input_block = "<div id='inputBlock'><h5 class='header center black-text'>Assignment</h5><div class='row center'><div class='input-field col s12'><input value='"+name+"' id='assignment' type='text' class='validate assignment' required><label for='assignment'>Assignment Name</label></div></div><br><br><br><br><br><div class='row center'><div class='input-field col s12'><input value='"+days+"' id='days-till-due' type='text' class='validate days-till-due' required><label for='days-till-due'>Days Till Due</label></div></div><br><br><br></div>";
+  e.setAttribute("id", "inputBlock");
+  e.innerHTML = input_block;
 
-  e.setAttribute("id", "inputBlock")
-
-  e.innerHTML = input_block
-
-  block_collection.appendChild(e)
+  block_collection.appendChild(e);
 }
 
 function arrayUnique(array) {
@@ -25,6 +28,39 @@ function arrayUnique(array) {
         }
     }
     return [a, b]
+}
+
+function loadInputInfo(){
+  if(localStorage.getItem("data")!= null){
+    for (var i=0; i<data.assignments.length; i++) {
+      paired_data.push({
+        assignment : data.assignments[i],
+        days_till_due : data.days_till_due[i]
+      });
+    }
+
+    sorted_status = false;
+
+    while (sorted_status==false) {
+      sorted_status = true;
+      for (var i=0; i<paired_data.length; i++) {
+        if (i+1!==paired_data.length) {
+          if (paired_data[i].days_till_due>paired_data[i+1].days_till_due) {
+            var d1 = paired_data[i];
+            var d2 = paired_data[i+1];
+            paired_data[i] = d2;
+            paired_data[i+1] = d1;
+            sorted_status = false;
+          }
+        }
+      }
+    }
+  }
+  for(var i = 0; i<paired_data.length; i++){
+    console.log("" + paired_data[i].assignment);
+    console.log(paired_data[i].days_till_due);
+    addInputBlock("" + paired_data[i].assignment,paired_data[i].days_till_due);
+  }
 }
 
 function saveInputInfo() {
