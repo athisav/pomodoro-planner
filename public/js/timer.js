@@ -6,7 +6,7 @@ function refresh_data () {
       data = JSON.parse(data);
       for (var i=0; i<data.assignments.length; i++) {
         if(data.assignments[i]+""==""){
-          
+
         }else{
         paired_data.push({
           assignment : data.assignments[i],
@@ -42,22 +42,9 @@ function listassign(){
   console.log(paired_data);
 }
 loadInputInfo();
-//The main program
+//Functions
+if(true){
 var paused = false;
-function main_loop () {
-  //console.log("init");
-  refresh_data();
-  assignment_display = document.getElementById("timer_assignment");
-  assignment_display.innerHTML = "'" + "Get Ready!" + "'";
-  button = document.getElementById("timer-button-2");
-  button.removeEventListener("click", loop);
-  button.remove();
-  timer = document.getElementById("timer");
-  //Preperation time
-  var countdown = 1;
-  var state = 0;
-  var running = true;
-
 //conversion between seconds and minutes
   function second_minute(i){
       var x = i;
@@ -68,7 +55,9 @@ function main_loop () {
     }
     return([y,x]);
   }
-
+  var countdown = 1;
+  var state = 0;
+  var running = false;
 //initialization of next timer
   function init(){
     cleardata();
@@ -129,7 +118,7 @@ function displaytime(t){
     }
       return 0;
   }
-
+}
 //function that keeps running
   function loop(){
     if(running){
@@ -140,6 +129,19 @@ function displaytime(t){
       //console.log("stop");
     }
   }
+function main_loop () {
+  //console.log("init");
+  refresh_data();
+  assignment_display = document.getElementById("timer_assignment");
+  assignment_display.innerHTML = "'" + "Get Ready!" + "'";
+  button = document.getElementById("timer-button-2");
+  button.removeEventListener("click", loop);
+  button.remove();
+  timer = document.getElementById("timer");
+  //Preperation time
+  countdown = 1;
+  state = 0;
+  running = true;
   setInterval(loop,1000);
 }
 
