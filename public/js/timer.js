@@ -43,7 +43,6 @@ function listassign(){
 }
 loadInputInfo();
 //Functions
-if(true){
 var paused = false;
 //conversion between seconds and minutes
   function second_minute(i){
@@ -119,7 +118,12 @@ function displaytime(t){
       return 0;
   }
 }
-//function that keeps running
+/******************************************************************************
+                                Main Program
+*******************************************************************************/
+
+
+//loop that keeps running once every second
   function loop(){
     if(running){
       if(update()){
