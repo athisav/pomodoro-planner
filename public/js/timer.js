@@ -1,4 +1,6 @@
 paired_data = [];
+var but2 = document.getElementById("timer-button-2")
+var but3 = document.getElementById("timer-button-3")
 //Loads assigment data
 function refresh_data () {
     if(localStorage.getItem("data")!= null){
@@ -57,8 +59,11 @@ var paused = false;
   var countdown = 1;
   var state = 0;
   var running = false;
+  var inter = false;//True when on select mode
+  var cont = null;
+  but3.style.visibility = "hidden"
 //initialization of next timer
-  function init(){
+  function init(cont){
     cleardata();
     saveInputInfo();
       var time = 300;
@@ -74,10 +79,14 @@ var paused = false;
           //
 
           state = 1
-          time = 1500;
-
+          time = 5;
+      }else if(cont){
+        assignment_display.innerHTML = "'" + "Break Time!" + "'";
+        inter = true;
+        state = 0;
       }else{
         assignment_display.innerHTML = "'" + "Break Time!" + "'";
+        inter = true;
           paired_data.shift();
           state = 0;
       }
@@ -106,7 +115,7 @@ function displaytime(t){
 
 //updates timer
   function update(){
-    if(!paused){
+    if(!paused&&!inter){
       countdown--;
       displaytime(countdown);
       if(countdown<1){
@@ -117,7 +126,7 @@ function displaytime(t){
     }
       return 0;
   }
-}
+
 /******************************************************************************
                                 Main Program
 *******************************************************************************/
@@ -127,7 +136,18 @@ function displaytime(t){
   function loop(){
     if(running){
       if(update()){
-          init();
+          init(cont);
+          if(cont == true){
+            cont = false;
+          }
+          if(inter == true){
+            but2.innerHTML = "Not Done";
+            but3.style.visibility = "initial";
+            but3.innerHTML = "Done";
+          }else{
+            but2.innerHtml = "Pause";
+            but3.style.visibility = "hidden";
+          }
       }
     }else{
       //console.log("stop");
@@ -139,8 +159,7 @@ function main_loop () {
   assignment_display = document.getElementById("timer_assignment");
   assignment_display.innerHTML = "'" + "Get Ready!" + "'";
   button = document.getElementById("timer-button-2");
-  button.removeEventListener("click", loop);
-  button.remove();
+  button.innerHTML = "Pause"
   timer = document.getElementById("timer");
   //Preperation time
   countdown = 1;
@@ -158,5 +177,22 @@ function pause(){
   }
 }
 
-document.getElementById("timer-button-2").addEventListener("click", main_loop);
-document.getElementById("timer-button-3").addEventListener("click", pause);
+function button2(){
+  if(!running){
+    main_loop();
+  }else if(inter){
+    cont = true;
+    inter = false;
+  }else{
+    pause();
+  }
+}
+
+function button3(){
+  cont = false;
+  inter = false;
+}
+
+but2.addEventListener("click", button2);
+
+but3.addEventListener("click", button3);
