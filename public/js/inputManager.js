@@ -31,35 +31,15 @@ function arrayUnique(array) {
 }
 
 function loadInputInfo(){
-  if(localStorage.getItem("data")!= null){
-    for (var i=0; i<data.assignments.length; i++) {
-      paired_data.push({
-        assignment : data.assignments[i],
-        days_till_due : data.days_till_due[i]
-      });
-    }
-
-    sorted_status = false;
-
-    while (sorted_status==false) {
-      sorted_status = true;
-      for (var i=0; i<paired_data.length; i++) {
-        if (i+1!==paired_data.length) {
-          if (paired_data[i].days_till_due>paired_data[i+1].days_till_due) {
-            var d1 = paired_data[i];
-            var d2 = paired_data[i+1];
-            paired_data[i] = d2;
-            paired_data[i+1] = d1;
-            sorted_status = false;
-          }
-        }
-      }
-    }
-  }
+  refresh_data();
   for(var i = 0; i<paired_data.length; i++){
-    console.log("" + paired_data[i].assignment);
+    console.log(""+ paired_data[i].assignment);
+    if(paired_data[i].assignment+"" == ""){
+      console.log("WARNING: Empty space detected");
+    }else{
     console.log(paired_data[i].days_till_due);
     addInputBlock("" + paired_data[i].assignment,paired_data[i].days_till_due);
+  }
   }
 }
 
@@ -79,6 +59,7 @@ function saveInputInfo() {
   work_data = {}
   work_data.assignments = assignments
   work_data.days_till_due = days_till_due
+  localStorage.clear();
   localStorage.setItem("data", JSON.stringify(work_data))
   console.log(JSON.stringify(work_data))
 }
